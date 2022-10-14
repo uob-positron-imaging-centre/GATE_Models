@@ -1,0 +1,98 @@
+
+###  P H A N T O M S ###
+/gate/world/daughters/name                      sphere
+/gate/world/daughters/insert                    sphere
+/gate/sphere/setMaterial                           Glass_Scatter
+#/gate/phantom/vis/forceSolid
+#/gate/phantom/vis/setColor                      blue
+#/gate/phantom/vis/setVisible                    1
+
+/gate/sphere/geometry/setRmax               50 mm
+#/gate/sphere/geometry/setYLength               200 mm
+#/gate/sphere/geometry/setZLength               200 mm
+#/gate/phantom/geometry/setPhiStart              2 deg
+#/gate/phantom/geometry/setDeltaPhi              176 deg
+#/gate/phantom/geometry/setThetaStart            0 deg
+#/gate/phantom/geometry/setDeltaTheta            180 deg
+#/gate/aircylinder/placement/setRotationAxis               1 0 0
+#/gate/aircylinder/placement/setRotationAngle              90 deg
+
+#/gate/sphere/placement/setTranslation          {x} {y} {z} mm
+##/gate/sphere/moves/insert                      translation
+#/gate/sphere/translation/setSpeed              0 0 0 cm/s
+/gate/geometry/rebuild
+
+
+
+
+#=====================================================
+# INITIALISATION
+#=====================================================
+
+/gate/run/initialize
+
+
+
+### S O U R C E    D E F I N I T I O N ###
+
+# F A S T   P R O D U C T I O N   M O D U L E   F O R   F - 1 8   I S O T O P E S
+# S O U R C E
+/gate/source/addSource twogamma
+/gate/source/twogamma/setActivity {act} MBq
+/gate/source/twogamma/setType backtoback
+# POSITION
+/gate/source/twogamma/gps/centre 0. 0. 0. cm
+# PARTICLE
+/gate/source/twogamma/gps/particle gamma
+/gate/source/twogamma/gps/energytype Mono
+/gate/source/twogamma/gps/monoenergy 0.511 MeV
+# TYPE = Volume or Surface
+/gate/source/twogamma/gps/type Point
+# SHAPE = Sphere or Cylinder
+#/gate/source/twogamma/gps/shape Cylinder
+#/gate/source/twogamma/gps/radius 0.5 mm
+#/gate/source/twogamma/gps/halfz 25 mm
+
+# SET THE ANGULAR DISTRIBUTION OF EMISSION
+/gate/source/twogamma/gps/angtype iso
+# SET MIN AND MAX EMISSION ANGLES
+/gate/source/twogamma/gps/mintheta 0. deg
+/gate/source/twogamma/gps/maxtheta 180. deg
+/gate/source/twogamma/gps/minphi    0. deg
+/gate/source/twogamma/gps/maxphi 360. deg
+
+/gate/source/twogamma/attachTo     sphere
+
+/gate/source/list
+
+
+#-------------------oooooOOOOO00000OOOOOooooo---------------------#
+#                                                                 #
+#                   D E F I N I T I O N   O F                     #
+#                Y O U R   O U T P U T   F I L E                  #
+#                                                                 #
+#-------------------oooooOOOOO00000OOOOOooooo---------------------#
+
+#=====================================================
+#  D A T A   O U T P U T
+#=====================================================
+
+/gate/random/setEngineSeed auto
+
+#/gate/output/root/enable
+#/gate/output/root/setFileName               output/{outname}
+#/gate/output/root/setRootNtupleFlag         0
+#/gate/output/root/setRootHitFlag            0
+#/gate/output/root/setRootSinglesFlag        0
+#/gate/output/root/setRootCoincidencesFlag   1
+#/gate/output/root/setRootdelayFlag          0
+
+/gate/output/ascii/enable
+/gate/output/ascii/setFileName                    output/Mouse_{sep}mm_{act}MBq_
+/gate/output/ascii/setOutFileHitsFlag           0
+/gate/output/ascii/setOutFileSinglesFlag        0
+/gate/output/ascii/setOutFileEWindowFlag        0
+/gate/output/ascii/setOutFileCoincidencesFlag   1
+/gate/output/ascii/setCoincidenceMask 0 0 0 0 0 0 1 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0
+
+
