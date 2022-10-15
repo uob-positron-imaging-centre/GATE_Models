@@ -42,6 +42,7 @@ from scipy.interpolate import interp1d
 import sys
 import numpy as np
 import pept
+import sys
 with open(sys.argv[1], 'rb') as f:
     parameters = pickle.load(f)
 access_id = 0
@@ -54,7 +55,7 @@ var1, var2, = parameters["value"]
 sep = np.array([525])
 act = np.array([[2, 10, 20, 30, 45]])
 
-times = 0.5/np.sqrt(act)+0.01
+times = 1
 
 rates = []
 trues = []
@@ -66,23 +67,9 @@ for i in range(1):
         print('submitting')
 
         os.system('Gate -a [Time,'+str(times[i][j])+'][Sep,'+str(sep[i])+'][Act,'+str(act[i][j])+'][dt1,'+str(var1)+'][tres,'+str(var2)+'][ID,'+str(access_id)+'] runForteAccess.mac')
-        
-        #os.system('Gate -a [time,'+str(times[j])+'][activity,'+str(act[j])+'][dt1,'+str(var1)+'][pileup,'+str(var3)+'][lld,'+str(var4)+'][uld,'+str(var5)+'][eres,'+str(var6)+'][tres,'+str(var7)+'][ID,'+str(access_id)+'] Camera_ACCES.mac')
-
-
-
 
         data = np.loadtxt('output/simple/Mouse_'+str(sep[i])+'mm_'+str(act[i][j])+'MBq_'+str(access_id)+'_finalCoinc.dat', usecols=(0, 1, 2, 3, 5, 6, 7))
         
-        os.system('rm /rds/projects/w/windowcr-pept-as-a-service/Forte_Rechar/ForteTest/output/simple/Mouse_'+str(sep[i])+'mm_'+str(act[i][j])+'MBq_'+str(access_id)+'_finalCoinc.dat')
-        os.system('rm /rds/projects/w/windowcr-pept-as-a-service/Forte_Rechar/ForteTest/output/simple/Mouse_'+str(sep[i])+'mm_'+str(act[i][j])+'MBq_'+str(access_id)+'_Coincidences.dat')
-        os.system('rm /rds/projects/w/windowcr-pept-as-a-service/Forte_Rechar/ForteTest/output/simple/Mouse_'+str(sep[i])+'mm_'+str(act[i][j])+'MBq_'+str(access_id)+'_delay.dat')
-        os.system('rm /rds/projects/w/windowcr-pept-as-a-service/Forte_Rechar/ForteTest/output/simple/Mouse_'+str(sep[i])+'mm_'+str(act[i][j])+'MBq_'+str(access_id)+'_Run.dat')
-
-        os.system('rm /rds/projects/w/windowcr-pept-as-a-service/Forte_Rechar/ForteTest/logs/sim_slurm_'+str(access_id)+'.out')
-        os.system('rm /rds/projects/w/windowcr-pept-as-a-service/Forte_Rechar/ForteTest/logs/sim_slurm_'+str(access_id)+'.stats')
-
-
         z1 = data[:, 3]
         z2 = data[:, 6]
         y1 = data[:, 2]

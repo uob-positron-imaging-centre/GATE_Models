@@ -44,3 +44,49 @@ setup =
   seed = 12349
   target = 0.1
 verbose = 4
+--------------------------------------------------------------------------------
+Starting ACCESS run at 11:56:05 on 15/10/2022
+
+Access
+------
+multi_objective = None
+paths = 
+  AccessPaths
+  -----------
+  directory = access_seed12349
+  epochs = access_seed12349/epochs_pop100.csv
+  epochs_scaled = access_seed12349/epochs_pop100_scaled.csv
+  history = access_seed12349/history_pop100.csv
+  history_scaled = access_seed12349/history_pop100_scaled.csv
+  outputs = access_seed12349/outputs
+  results = access_seed12349/results
+  script = access_seed12349/access_script.py
+  setup = access_seed12349/access_setup.toml
+progress = 
+  AccessProgress
+  --------------
+  epochs = None
+  epochs_scaled = None
+  history = None
+  history_scaled = None
+  stderr = None
+  stdout = None
+setup = 
+  AccessSetup
+  -----------
+  parameters = 
+          value   min   max  sigma
+    dt1     1.5   0.0   3.0    1.2
+    tres   15.0  10.0  20.0    4.0
+  parameters_scaled = 
+          value  min  max  sigma
+    dt1    1.25  0.0  2.5    1.0
+    tres   3.75  2.5  5.0    1.0
+  population = 100
+  rng = Generator(PCG64)
+  scaling = [1.2 4. ]
+  scheduler_cmd = ['/rds/bear-apps/2020a/EL8-has/software/Python/3.8....
+  script = #!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# File   ...
+  seed = 12349
+  target = 0.1
+verbose = 4

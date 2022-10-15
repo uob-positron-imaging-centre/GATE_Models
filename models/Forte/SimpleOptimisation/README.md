@@ -3,7 +3,7 @@
 
 In this folder you will find all of the codes needed to generate test data and calibrate a GATE model of the ADAC Forte using the SLURM job manager with an HPC or your own machine which can run GATE and ACCES. 
 
-In this example a GATE model of the ADAC Forte is prescribed a singles dead time of 1.5 us and time resolution of 15 ns. We want to use ACCES to find these values by comparing the simulated detector response with a guess of the correct parameters to the ground truth detector response using the prescribed parameters.
+In this example a GATE model of the ADAC Forte is prescribed a singles dead time of 1000 ns and time resolution of 15 ns. We want to use ACCES to find these values by comparing the simulated detector response with a guess of the correct parameters to the ground truth detector response using the prescribed parameters.
 
 To generate ground truth detector response run 'python3 launch.py' or use the pregenerated data found in 'Countrate_test_525mm.txt'.
 
