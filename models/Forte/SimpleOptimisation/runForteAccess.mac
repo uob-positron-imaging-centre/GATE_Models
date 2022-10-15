@@ -42,7 +42,7 @@
 
 #/gate/application/setTotalNumberOfPrimaries 50
 
-/gate/application/setTimeSlice     0.002  s
+/gate/application/setTimeSlice     0.01  s
 /gate/application/setTimeStart     0.0   s
 /gate/application/setTimeStop      {Time}  s
 
