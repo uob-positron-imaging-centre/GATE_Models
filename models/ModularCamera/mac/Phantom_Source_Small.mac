@@ -1,0 +1,109 @@
+###  P H A N T O M S ###
+/gate/world/daughters/name                      phantom
+/gate/world/daughters/insert                    sphere
+/gate/phantom/setMaterial                	    Plastic
+#/gate/phantom/vis/forceWireframe
+#/gate/phantom/vis/setColor                      white
+#/gate/phantom/vis/setVisible                    1
+
+/gate/phantom/geometry/setRmin                  0 mm
+/gate/phantom/geometry/setRmax                  5 mm
+/gate/phantom/geometry/setPhiStart              0 deg
+/gate/phantom/geometry/setDeltaPhi              360 deg
+/gate/phantom/geometry/setThetaStart            0 deg
+/gate/phantom/geometry/setDeltaTheta            360 deg
+
+/gate/phantom/placement/setTranslation          0 -150 0 mm
+/gate/phantom/moves/insert                      translation
+/gate/phantom/translation/setSpeed              0 0 0 cm/s
+
+/gate/phantom/attachPhantomSD
+/gate/geometry/rebuild
+#/vis/viewer/update
+
+
+### S O U R C E     D E F I N I T I O N ###
+
+/gate/phantom/daughters/name                      Source1
+/gate/phantom/daughters/insert                    sphere
+/gate/Source1/setMaterial                Plastic
+#/gate/Source1/vis/forceWireframe
+#/gate/Source1/vis/setColor               white
+#/gate/Source1/vis/setVisible             1
+
+/gate/Source1/geometry/setRmin           0 mm
+/gate/Source1/geometry/setRmax           0.1 mm
+/gate/Source1/geometry/setPhiStart       0 deg
+/gate/Source1/geometry/setDeltaPhi       360 deg
+/gate/Source1/geometry/setThetaStart     0 deg
+/gate/Source1/geometry/setDeltaTheta     360 deg
+/gate/Source1/placement/setTranslation   0 0 0 mm
+
+/gate/Source1/attachPhantomSD
+/gate/geometry/rebuild
+#/vis/viewer/update
+
+
+#=====================================================
+# INITIALISATION
+#=====================================================
+
+/gate/run/initialize
+
+
+
+### S O U R C E    D E F I N I T I O N ###
+
+# F A S T   P R O D U C T I O N   M O D U L E   F O R   F - 1 8   I S O T O P E S
+/gate/source/addSource F18_Source
+/gate/source/F18_Source/setActivity 10 MBq
+/gate/source/F18_Source/gps/particle e+
+/gate/source/F18_Source/setForcedUnstableFlag true
+/gate/source/F18_Source/setForcedHalfLife 6586 s
+/gate/source/F18_Source/gps/energytype Fluor18
+
+/gate/source/F18_Source/gps/type Volume
+/gate/source/F18_Source/gps/shape Sphere
+/gate/source/F18_Source/gps/radius 0.1 mm
+/gate/source/F18_Source/gps/angtype iso
+/gate/source/F18_Source/gps/centre 0.0 0.0 0. cm
+
+
+/gate/source/F18_Source/attachTo     Source1
+
+/gate/source/list
+
+
+#-------------------oooooOOOOO00000OOOOOooooo---------------------#
+#                                                                 #
+#                   D E F I N I T I O N   O F                     #
+#                Y O U R   O U T P U T   F I L E                  #
+#                                                                 #
+#-------------------oooooOOOOO00000OOOOOooooo---------------------#
+
+#=====================================================
+#  D A T A   O U T P U T   
+#=====================================================
+
+/gate/random/setEngineSeed 123456789
+
+
+#/gate/output/root/enable
+#/gate/output/root/setFileName                    output/Test_
+#/gate/output/root/setRootHitFlag            0
+#/gate/output/root/setRootSinglesFlag        1
+#/gate/output/root/setRootCoincidencesFlag   1
+#/gate/output/root/setRootNtupleFlag         0
+
+/gate/output/ascii/enable
+/gate/output/ascii/setFileName                    output/Test_
+/gate/output/ascii/setOutFileHitsFlag           0
+/gate/output/ascii/setOutFileSinglesFlag        1
+/gate/output/ascii/setOutFileCoincidencesFlag   0
+/gate/output/ascii/setSingleMask 0 1 0 0 0 0 1 1 0 1 1 1 1 1 0 0 0 0 0 0
+#/gate/output/ascii/setCoincidenceMask 0 0 0 0 0 0 1 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 
+#                               run evnt src srcX srcY srcZ V1-V6 tms Erg sinX sinY sinZ cptPhan cptDect rgPhan rgDetec Name1 Name2
+#/gate/output/ascii/setSingleMask 0 0 0 0 0 0 0 1 0 1 1 1 0 1 0 0 0 0 0 0
+#/gate/output/ascii/setSingleMask 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+
+
