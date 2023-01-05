@@ -1,0 +1,315 @@
+#                                                             
+#        F O R   I M A G I N G    A P P L I CA T I O N S       
+#                                                     
+#-------------------oooooOOOOO00000OOOOOooooo---------------------#
+
+
+#=====================================================
+# VISUALISATION
+#=====================================================
+
+#/vis/disable
+
+#/vis/open                           OGL
+#/vis/viewer/reset
+#/vis/viewer/set/viewpointThetaPhi   120 30
+#/vis/viewer/set/viewpointThetaPhi 30 30
+#/vis/viewer/set/viewpointThetaPhi   0 0
+#/vis/viewer/zoom                    1
+#/vis/viewer/set/style surface
+#/vis/drawVolume
+#/tracking/storeTrajectory           1
+#/vis/scene/add/trajectories 
+#/vis/scene/endOfEventAction accumulate
+#/vis/scene/add/axes
+#/vis/viewer/update
+
+
+
+#=====================================================
+# GEOMETRY
+#=====================================================
+
+
+/gate/geometry/setMaterialDatabase    data/GateMaterials.db
+
+
+#
+#     W O R L D
+#
+/gate/world/geometry/setXLength       200. cm
+/gate/world/geometry/setYLength       200. cm
+/gate/world/geometry/setZLength       200. cm
+/gate/world/setMaterial               Air
+#/gate/world/vis/setColor              white
+#/gate/world/vis/forceWireframe
+#/gate/world/vis/setVisible            0
+
+
+
+#	Modular Camera
+/gate/world/daughters/name                          Camera
+/gate/world/daughters/systemType                    cylindricalPET
+/gate/world/daughters/insert                        box
+/gate/Camera/placement/setTranslation       0.0 0.0 0.0 cm
+/gate/Camera/geometry/setXLength       200. cm
+/gate/Camera/geometry/setYLength       200. cm
+/gate/Camera/geometry/setZLength       200. cm
+/gate/Camera/setMaterial                    Air
+#/gate/Camera/vis/setColor                   white
+#/gate/Camera/vis/forceWireframe
+#/gate/Camera/vis/setColor white
+#/gate/Camera/vis/setVisible                 0
+
+#     M O D U L E
+
+/gate/Camera/daughters/name     module
+/gate/Camera/daughters/insert   box
+/gate/module/setMaterial Air
+/gate/module/geometry/setXLength 355 mm
+/gate/module/geometry/setYLength 80 mm
+/gate/module/geometry/setZLength 450 mm
+/gate/module/placement/setTranslation  0. 0. 0. mm  # 475 mm = 250 mm separation
+#/gate/module/vis/forceWireframe
+#/gate/module/vis/setColor        red
+#/gate/module/vis/setVisible                 1
+
+#   F R A M E   T O P
+/gate/module/daughters/name  frametop
+/gate/module/daughters/insert   box
+/gate/frametop/placement/setTranslation 0 39 0 mm
+/gate/frametop/geometry/setXLength  355 mm
+/gate/frametop/geometry/setYLength  2 mm
+/gate/frametop/geometry/setZLength  450 mm
+/gate/frametop/setMaterial  Aluminium
+#/gate/frametop/vis/forceWireframe
+#/gate/frametop/vis/setColor grey
+#/gate/frametop/vis/setVisible 1
+
+
+#   F R A M E   B O T T O M
+/gate/module/daughters/name  framebottom
+/gate/module/daughters/insert   box
+/gate/framebottom/placement/setTranslation 0 -39 0 mm
+/gate/framebottom/geometry/setXLength  355 mm
+/gate/framebottom/geometry/setYLength  2 mm
+/gate/framebottom/geometry/setZLength  450 mm
+/gate/framebottom/setMaterial  Aluminium
+#/gate/framebottom/vis/forceWireframe
+#/gate/framebottom/vis/setColor grey
+#/gate/framebottom/vis/setVisible 1
+
+
+
+#   F R A M E   S I D E 1
+/gate/module/daughters/name  frameside1
+/gate/module/daughters/insert   box
+/gate/frameside1/placement/setTranslation 176.5 0 0 mm
+/gate/frameside1/geometry/setXLength  2 mm
+/gate/frameside1/geometry/setYLength  74 mm
+/gate/frameside1/geometry/setZLength  450 mm
+/gate/frameside1/setMaterial  Aluminium
+#/gate/frameside1/vis/forceWireframe
+#/gate/frameside1/vis/setColor grey
+#/gate/frameside1/vis/setVisible 1
+
+
+
+#   F R A M E   S I D E 2
+/gate/module/daughters/name  frameside2
+/gate/module/daughters/insert   box
+/gate/frameside2/placement/setTranslation -176.5 0 0 mm
+/gate/frameside2/geometry/setXLength  2 mm
+/gate/frameside2/geometry/setYLength  74 mm
+/gate/frameside2/geometry/setZLength  450 mm
+/gate/frameside2/setMaterial  Aluminium
+#/gate/frameside2/vis/forceWireframe
+#/gate/frameside2/vis/setColor grey
+#/gate/frameside2/vis/setVisible 1
+
+#   F R A M E   B A C K
+/gate/module/daughters/name  frameback
+/gate/module/daughters/insert   box
+/gate/frameback/placement/setTranslation 0 0 -224 mm
+/gate/frameback/geometry/setXLength  351 mm
+/gate/frameback/geometry/setYLength  74 mm
+/gate/frameback/geometry/setZLength  2 mm
+/gate/frameback/setMaterial  Aluminium
+#/gate/frameback/vis/forceWireframe
+#/gate/frameback/vis/setColor grey
+#/gate/frameback/vis/setVisible 1
+
+
+#   F R A M E   F R O N T
+/gate/module/daughters/name  framefront
+/gate/module/daughters/insert   box
+/gate/framefront/placement/setTranslation 0 0 224 mm
+/gate/framefront/geometry/setXLength  351 mm
+/gate/framefront/geometry/setYLength  74 mm
+/gate/framefront/geometry/setZLength  2 mm
+/gate/framefront/setMaterial  Aluminium
+#/gate/framefront/vis/forceWireframe
+#/gate/framefront/vis/setColor grey
+#/gate/framefront/vis/setVisible 1
+
+
+#     W I N D O W
+
+/gate/framefront/daughters/name window
+/gate/framefront/daughters/insert box
+/gate/window/placement/setTranslation -136.5 0. 0  mm
+/gate/window/geometry/setXLength 47 mm
+/gate/window/geometry/setYLength 56 mm
+/gate/window/geometry/setZLength 2 mm
+/gate/window/setMaterial Air
+#/gate/window/vis/setColor white
+#/gate/window/vis/forceWireframe
+#/gate/window/vis/setVisible                 1
+
+
+#     B L O C K
+
+/gate/module/daughters/name block
+/gate/module/daughters/insert box
+/gate/block/placement/setTranslation -136.5 0.0 147.5 mm
+/gate/block/geometry/setXLength 55 mm
+/gate/block/geometry/setYLength 60 mm
+/gate/block/geometry/setZLength 155.0 mm
+/gate/block/setMaterial Air
+#/gate/block/vis/setColor blue
+#/gate/block/vis/forceWireframe
+#/gate/block/vis/setVisible                 1
+
+#   E L E C T R O N I C S
+
+/gate/module/daughters/name electronics
+/gate/module/daughters/insert box
+/gate/electronics/placement/setTranslation 0 0 -50 mm
+/gate/electronics/geometry/setXLength 300 mm
+/gate/electronics/geometry/setYLength 40 mm
+/gate/electronics/geometry/setZLength 150 mm
+/gate/electronics/setMaterial Elec
+#/gate/electronics/vis/setColor yellow
+#/gate/electronics/vis/forceWireframe
+#/gate/electronics/vis/setVisible        1
+
+
+#   L I G H T G U I D E
+/gate/block/daughters/name lightguide
+/gate/block/daughters/insert box
+/gate/lightguide/placement/setTranslation 0 0 41 mm
+/gate/lightguide/geometry/setXLength 50 mm
+/gate/lightguide/geometry/setYLength 54 mm
+/gate/lightguide/geometry/setZLength 5 mm
+/gate/lightguide/setMaterial Glass
+#/gate/lightguide/vis/setColor white
+#/gate/lightguide/vis/forceWireframe
+#/gate/lightguide/vis/setVisible     1
+
+#   P M T
+/gate/block/daughters/name PMTs
+/gate/block/daughters/insert box
+/gate/PMTs/placement/setTranslation 0 0 -11.5 mm
+/gate/PMTs/geometry/setXLength 50 mm
+/gate/PMTs/geometry/setYLength 54 mm
+/gate/PMTs/geometry/setZLength 100 mm
+/gate/PMTs/setMaterial PMT
+#/gate/PMTs/vis/setColor green
+#/gate/PMTs/vis/forceWireframe
+#/gate/PMTs/vis/setVisible 1
+
+#	C R Y S T A L
+
+/gate/block/daughters/name crystal
+/gate/block/daughters/insert box
+/gate/crystal/placement/setTranslation 0 0 58.5 mm
+/gate/crystal/geometry/setXLength 6.25 mm
+/gate/crystal/geometry/setYLength 6.75 mm
+/gate/crystal/geometry/setZLength 30.0 mm
+/gate/crystal/setMaterial BGO
+#/gate/crystal/vis/setColor yellow
+#/gate/crystal/vis/setVisible                 1
+
+
+#	B G O
+
+/gate/crystal/daughters/name BGO
+/gate/crystal/daughters/insert box
+/gate/BGO/geometry/setXLength 6.25 mm
+/gate/BGO/geometry/setYLength 6.75 mm
+/gate/BGO/geometry/setZLength 30.0 mm
+/gate/BGO/setMaterial BGO
+#/gate/BGO/vis/setColor yellow
+#/gate/BGO/vis/setVisible                 1
+
+
+
+
+
+#	R E P E A T    C R Y S T A L
+
+/gate/crystal/repeaters/insert cubicArray
+/gate/crystal/cubicArray/setRepeatNumberX 8
+/gate/crystal/cubicArray/setRepeatNumberY 8
+/gate/crystal/cubicArray/setRepeatNumberZ 1
+/gate/crystal/cubicArray/setRepeatVector 6.25 6.75  0 mm
+
+
+#	R E P E A T    BLOCK
+
+/gate/block/repeaters/insert linear
+/gate/block/linear/setRepeatNumber 4
+/gate/block/linear/setRepeatVector 91. 0. 0. mm
+/gate/block/linear/autoCenter false
+
+#	R E P E A T     W I N D O W
+
+/gate/window/repeaters/insert linear
+/gate/window/linear/setRepeatNumber 4
+/gate/window/linear/setRepeatVector 91. 0. 0. mm
+/gate/window/linear/autoCenter false
+
+
+#   R E P E A T    M O D U L E
+
+/gate/module/repeaters/insert genericRepeater
+#/gate/module/genericRepeater/useRelativeTranslation 1
+/gate/module/genericRepeater/setPlacementsFilename data/count-rate-calibration.placements
+
+
+#	A T T A C H    C R Y S T A L  SD
+
+/gate/BGO/attachCrystalSD
+
+
+/gate/systems/list 
+
+
+
+
+#   M A K E    A     S Y S T E M
+
+/gate/systems/Camera/rsector/attach module
+/gate/systems/Camera/module/attach block
+/gate/systems/Camera/crystal/attach crystal
+/gate/systems/Camera/layer0/attach BGO
+
+
+
+/gate/geometry/rebuild
+#/vis/viewer/update
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
